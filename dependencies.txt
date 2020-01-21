@@ -1,0 +1,6 @@
+Raspberry Pis:
+PIL>ImageTK -> "sudo apt-get install python3-pil python3-pil.imagetk"
+tkinter -> "sudo apt-get install python3-tk"
+
+Arduino:
+Joystick -> https://github.com/LordNuke/ArduinoLibs
