@@ -4,5 +4,7 @@
 
 extern void getData();
 extern void dumpBuffer(byte*, int);
+extern void sendData();
+extern byte calcChecksum(byte*, int, int);
 
 #endif

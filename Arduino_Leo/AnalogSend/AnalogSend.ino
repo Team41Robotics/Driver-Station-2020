@@ -1,29 +1,27 @@
 /*
-    Order: Dials, Sliders, Switches
+    Order of operations: Dials, Sliders, Switches
 */
 
 
 #include "PINS.h"
 #include "getData.h"
 
-byte checksum[2];                          // A math equation that is done on both sides of the serial connection to make sure the data is not corrupted
 
-
-
-
+// Set pins for all switches as inputs
+// and start serial comm. w/ Due
 void setup () {
-    // Set pins for all switches as inputs
-    for (int i = 2; i <= 13; i++) {
+    for (int i = 2; i <= NUM_SWITCHES; i++) {
         pinMode(i, INPUT_PULLUP);
     }
-    // Start serial comm. w/ Due
     Serial.begin(9600);
+    Serial1.begin(9600);
 }
 
 
-
+// Get the values of all devices, print it
+// to the screen and wait a quarter of a sec
 void loop() {
     getData();
-    dumpBuffer(dataBuffer, DATA_BUFFER_SIZE);
-    delay(250);
+    sendData();
+    delay(10);
 }
