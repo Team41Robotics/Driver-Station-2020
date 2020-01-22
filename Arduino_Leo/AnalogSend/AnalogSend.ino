@@ -1,5 +1,5 @@
 /*
-    Checksum order: Sliders, Dials, Switches
+    Order: Dials, Sliders, Switches
 */
 
 
@@ -25,5 +25,5 @@ void setup () {
 void loop() {
     getData();
     dumpBuffer(dataBuffer, DATA_BUFFER_SIZE);
-    delay(1000);
+    delay(250);
 }
