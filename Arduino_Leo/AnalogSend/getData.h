@@ -5,6 +5,9 @@
 extern void getData();
 extern void dumpBuffer(byte*, int);
 extern void sendData();
+extern int calcTransBuffSize();
 extern byte calcChecksum(byte*, int, int);
+
+extern byte transBuffer[];
 
 #endif

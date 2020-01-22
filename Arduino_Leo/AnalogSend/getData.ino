@@ -60,16 +60,33 @@ byte calcChecksum(byte vals[], int numVals, int byteNum) {
 }
 
 
-void sendData() {
-    byte transmitBuffer[TRANS_BUFFER_LENGTH];
-    transmitBuffer[0] = '\xFF';
-    transmitBuffer[1] = '\x55';
-    transmitBuffer[TRANS_BUFFER_LENGTH-2] = '\xFF';
-    transmitBuffer[TRANS_BUFFER_LENGTH-1] = '\x44';
+int calcTransBuffSize() {
     for (int i = 0; i < DATA_BUFFER_SIZE; i++) {
-        transmitBuffer[2 + i] = dataBuffer[i];
+        if (dataBuffer[i] == '\x55' || dataBuffer[i] == '\x44' || dataBuffer[i] == '\xFF') {
+            transBuffSize++;
+        }
     }
-    for (int i = 0; i < TRANS_BUFFER_LENGTH; i++) {
-        Serial1.print(transmitBuffer[i]);
+    return transBuffSize;
+}
+
+
+void sendData() {
+    byte transBuffer[calcTransBuffSize()];
+
+    for (int i = 2; i < DATA_BUFFER_SIZE; i++) {
+        if (dataBuffer[i-2] == '\x55' || dataBuffer[i-2] == '\x44' || dataBuffer[i-2] == '\xFF') {
+            transBuffer[(i++)-2] = '\xFF';
+        }
+        transBuffer[i] = dataBuffer[i];
+    }
+
+    transBuffer[0] = '\x55';
+    transBuffer[transBuffSize-1] = '\x44';
+
+    for (int i = 0; i < DATA_BUFFER_SIZE; i++) {
+        transBuffer[2 + i] = dataBuffer[i];
+    }
+    for (int i = 0; i < transBuffSize; i++) {
+        Serial1.print(transBuffer[i]);
     }
 }

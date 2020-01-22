@@ -10,8 +10,8 @@
 // Set pins for all switches as inputs
 // and start serial comm. w/ Due
 void setup () {
-    for (int i = 2; i <= NUM_SWITCHES; i++) {
-        pinMode(i, INPUT_PULLUP);
+    for (int i = 0; i < NUM_SWITCHES; i++) {
+        pinMode(switchPins[i], INPUT_PULLUP);
     }
     Serial.begin(9600);
     Serial1.begin(9600);
@@ -23,5 +23,6 @@ void setup () {
 void loop() {
     getData();
     sendData();
+    dumpBuffer(dataBuffer, DATA_BUFFER_SIZE);
     delay(10);
 }
