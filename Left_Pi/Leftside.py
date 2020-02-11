@@ -29,7 +29,7 @@ b3 = button.Button('btn3', (3*btnX) + (2*btnW), btnY, btnW, btnH, "Position 3")
 
 # Exit button - top left
 ex = button.Button('exit', 0, 0, 25, 25, "X", "red")
-
+ 
 
 
 ctx = Canvas(root, width=width, height=height, background="black")

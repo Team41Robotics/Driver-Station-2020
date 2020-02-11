@@ -1,0 +1,40 @@
+Metadata-Version: 2.1
+Name: button
+Version: 0.0.3.post3
+Summary: Tiny automation tool written by Python
+Home-page: https://github.com/somssi/button
+Author: Minhwan Kim
+Author-email: minhwan.kim@member.fsf.org
+License: UNKNOWN
+Project-URL: Documentation, https://github.com/somssi/button
+Project-URL: Source Code, https://github.com/somssi/button
+Description: # Button
+        Tiny automation tool written by Python
+        
+        ## Introduction
+        Button is a simple wrapper program for executing command line program or user-defined python script. Button provides abstract classes that can be extended to meet users' requirements.
+        
+        ## Installation
+        ```bash
+        $ pip install button
+        ```
+        
+        ## Usage
+        ```
+        # pre-defined task to enumerate available tasks
+        $ btn tasks
+        
+        $ btn <user-defined task name>
+        
+        # taskdir can be changed by command-line option '--taskdir'
+        $ btn --taskdir mybuttons tasks
+        ```
+        
+        ## Examples
+        See, [examples](https://github.com/somssi/button/tree/master/examples).
+        
+Keywords: automation build tool
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.*
+Description-Content-Type: text/markdown

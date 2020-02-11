@@ -1,0 +1,3 @@
+[console_scripts]
+btn = button.cli:main
+
