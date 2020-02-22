@@ -1,8 +1,18 @@
 import button
-import funcs
-import serial
-from tkinter import *
+from tkinter import Tk
+from tkinter import PhotoImage
+from tkinter import Canvas
+from tkinter import CENTER
+from tkinter import RIGHT
+from tkinter import LEFT
+import math
 
+test = True
+
+if (test):
+    import fakeSerial as serial
+else:
+    import serial
 
 
 
@@ -37,6 +47,8 @@ ctx.pack()
 
 
 def handle_click(event):
+    event.x = math.fabs(event.x-800)
+    event.y = math.fabs(event.y-480)
     # If any of the buttons are clicked, theere is a new line saying "selected"
     # and set the others to the position name, otherwise set them all to the position
     b1.checkClicked(event) 
@@ -45,25 +57,25 @@ def handle_click(event):
     ex.checkClicked(event)
     if (b1.isClicked):
         print("clicked")
-        b1.text = "Position 1\nSelected"
-        b2.text = "Position 2"
-        b3.text = "Position 3"
+        b1.text_active = "Position 1\nSelected"
+        b2.text_active = "Position 2"
+        b3.text_active = "Position 3"
     elif (b2.isClicked):
         print("clicked")
-        b1.text = "Position 1"
-        b2.text = "Position 2\nSelected"
-        b3.text = "Position 3"
+        b1.text_active = "Position 1"
+        b2.text_active = "Position 2\nSelected"
+        b3.text_active = "Position 3"
     elif (b3.isClicked):
         print("clicked")
-        b1.text = "Position 1"
-        b2.text = "Position 2"
-        b3.text = "Position 3\nSelected"
+        b1.text_active = "Position 1"
+        b2.text_active = "Position 2"
+        b3.text_active = "Position 3\nSelected"
     elif (ex.isClicked):
         exit()
     else:
-        b1.text = "Position 1"
-        b2.text = "Position 2"
-        b3.text = "Position 3"
+        b1.text_active = "Position 1"
+        b2.text_active = "Position 2"
+        b3.text_active = "Position 3"
     drawStuff()
 
 

@@ -1,2 +1,0 @@
-def sendData(ser):
-    pass

@@ -1,3 +1,4 @@
+#include "math.h"
 #include "VARS.h"
 #include "Functions.h"
 #include "Joystick.h"
@@ -27,19 +28,63 @@ void readButtons() {
 	}
 }
 
+void getPiData() {
+	if (Serial1.available()) {
+		int val = Serial1.read();
+		//SerialUSB.println(val);
+		switch(val) {
+			case 1:
+				pi1 = HAT_UPLEFT;
+				break;
+			case 2:
+				pi1 = HAT_UP;
+				break;
+			case 3:
+				pi1 = HAT_UPRIGHT;
+				break;
+			default:
+				pi1 = HAT_CENTER;
+				break;
+		}
+	}
+	if (Serial3.available()) {
+		int val = Serial3.read();
+		//SerialUSB.println(val);
+		switch(val) {
+			case 1:
+				pi2 = HAT_UPLEFT;
+				break;
+			case 2:
+				pi2 = HAT_UP;
+				break;
+			case 3:
+				pi2 = HAT_UPRIGHT;
+				break;
+			default:
+				pi2 = HAT_CENTER;
+				break;
+		}
+	}
+}
+
+
 void sendJoyStates() {
 	Joystick.clearState();
 	//SerialUSB.println((parsedData[5] << 8) + parsedData[4]);
-	Joystick.state.xRot.axis = (parsedData[1] << 8) + parsedData[0];
-	Joystick.state.yRot.axis = (parsedData[3] << 8) + parsedData[2];
+	Joystick.state.xRot.axis = fabs(((parsedData[1] << 8) + parsedData[0]) - 0x3FF);
+	Joystick.state.yRot.axis = fabs(((parsedData[3] << 8) + parsedData[2]) - 0x3FF);
 	Joystick.state.x.axis = (parsedData[5] << 8) + parsedData[4];
-	Joystick.state.y.axis = (parsedData[7] << 8) + parsedData[6];	
-	Joystick.state.buttons.b00 = !buttonStates[0];
-	Joystick.state.buttons.b01 = !buttonStates[1];
-	Joystick.state.buttons.b02 = !buttonStates[2];
-	Joystick.state.buttons.b03 = !buttonStates[3];
+	Joystick.state.y.axis = (parsedData[7] << 8) + parsedData[6];
+
+	Joystick.state.hats.switch1 = pi2;
+	Joystick.state.hats.switch2 = pi1;
+
+	Joystick.state.buttons.b00 = !buttonStates[5];
+	Joystick.state.buttons.b01 = !buttonStates[2];
+	Joystick.state.buttons.b02 = !buttonStates[3];
+	Joystick.state.buttons.b03 = !buttonStates[0];
 	Joystick.state.buttons.b04 = !buttonStates[4];
-	Joystick.state.buttons.b05 = !buttonStates[5];
+	Joystick.state.buttons.b05 = !buttonStates[1];
 
 	Joystick.state.buttons.b06 = parsedData[8];
 	Joystick.state.buttons.b07 = parsedData[9];
@@ -48,28 +93,13 @@ void sendJoyStates() {
 	Joystick.state.buttons.b10 = parsedData[12];
 	Joystick.state.buttons.b11 = parsedData[13];
 	Joystick.state.buttons.b12 = parsedData[14];
-	Joystick.state.buttons.b13 = parsedData[15];
-	Joystick.state.buttons.b14 = parsedData[16];
+	Joystick.state.buttons.b13 = parsedData[16];
+	Joystick.state.buttons.b14 = parsedData[15];
 	Joystick.sendState();
 }
 
 void prettyColors() {
-	setColors(LOW, HIGH, HIGH);
-	delay(1000);
-	setColors(HIGH, LOW, HIGH);
-	delay(1000);
-	setColors(HIGH, LOW, LOW);
-	delay(1000);
 	setColors(LOW, LOW, HIGH);
-	delay(1000);
-	setColors(HIGH, HIGH, HIGH);
-	delay(1000);
-	setColors(LOW, HIGH, LOW);
-	delay(1000);
-	setColors(LOW, LOW, LOW);
-	delay(1000);
-	setColors(HIGH, HIGH, LOW);
-	delay(1000);
 }
 
 
@@ -163,8 +193,8 @@ void parseBytes(int len) {
 	//SerialUSB.print("Parsing bytes, dial #1 is: ");
 	int dataIndex = 0;
 	for (int i = 0; i < len; i++) {
-		if (receiveBuffer[i] < 0x10) SerialUSB.print("0");
-		SerialUSB.print(receiveBuffer[i], HEX);
+		//if (receiveBuffer[i] < 0x10) SerialUSB.print("0");
+		//SerialUSB.print(receiveBuffer[i], HEX);
 		if (receiveBuffer[i] == 0xFF && (receiveBuffer[i+1] == 0xFF || receiveBuffer[i+1] == 0xAA || receiveBuffer[i+1] == 0x55)) {
 			parsedData[dataIndex] = receiveBuffer[++i];
 		} else {
@@ -175,5 +205,5 @@ void parseBytes(int len) {
 	for (int i = 0; i < len; i++) {
 		//SerialUSB.print(parsedData[i]);
 	}
-	SerialUSB.println();
+	//SerialUSB.println();
 }

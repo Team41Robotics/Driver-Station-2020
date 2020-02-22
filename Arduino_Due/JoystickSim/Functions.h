@@ -7,6 +7,7 @@ void setColors();
 void prettyColors();
 void readButtons();
 void sendJoyStates();
+void getPiData();
 void parseBytes(int);
 
 int receiveBytes();

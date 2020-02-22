@@ -1,14 +1,25 @@
 import button
-# import funcs
-#import serial
-from tkinter import *
+from tkinter import Tk
+from tkinter import PhotoImage
+from tkinter import Canvas
+from tkinter import CENTER
+from tkinter import RIGHT
+from tkinter import LEFT
+import math
 
-#ser = serial.Serial("/dev/ttyACM0", 9600)  # /dev/ttyAMA0 on the pi
+test = True
+
+if (test):
+    import fakeSerial as serial
+else:
+    import serial
+
+ser = serial.Serial("/dev/tty", 9600)  # /dev/ttyAMA0 on the pi
 
 root = Tk()
 
 # Variables
-img = PhotoImage(file="/home/pi/Driver-Station/Zoom.gif")
+img = PhotoImage(file="./Zoom.gif")
 img2 = img.subsample(2)
 img3 = img2.subsample(2)
 imageTable = [img3, img2, img]
@@ -36,6 +47,8 @@ ctx.pack()
 
 
 def handle_click(event):
+    event.x = math.fabs(event.x-800)
+    event.y = math.fabs(event.y-480)
     # If any of the buttons are clicked, theere is a new line saying "selected"
     # and set the others to the position name, otherwise set them all to the position
     b1.checkClicked(event)
@@ -87,14 +100,11 @@ ctx.pack()
 
 def publish():
     if b1.isClicked:
-        pass
-        #ser.write(b'\x01')
+        ser.write(b'\x01')
     elif b2.isClicked:
-        pass
-        #ser.write(b'\x02')
+        ser.write(b'\x02')
     elif b3.isClicked:
-        pass
-        #ser.write(b'\x03')
+        ser.write(b'\x03')
     root.after(delay, publish)
 
 

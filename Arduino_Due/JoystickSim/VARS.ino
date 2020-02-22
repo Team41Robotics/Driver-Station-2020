@@ -1,10 +1,13 @@
 #include "VARS.h"
+#include <Joystick.h>
 
 byte receiveBuffer[RECEIVE_BUFFER_SIZE];
 byte parsedData[DATA_BUFFER_SIZE];
 
 int receiveIndex = 0;
 int receiverState = RCV_HUNT;
+int pi1 = HAT_CENTER;
+int pi2 = HAT_CENTER;
 int buttonPorts[NUM_BUTTONS] = {2, 3, 4, 7, 8, 9};
 int buttonRedPorts[NUM_BUTTONS] = {22, 23, 24, 27, 28, 29};
 int buttonGreenPorts[NUM_BUTTONS] = {32, 33, 34, 37, 38, 39};
