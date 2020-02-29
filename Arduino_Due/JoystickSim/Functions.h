@@ -3,7 +3,7 @@
 
 
 void setupButtons();
-void setColors();
+void setColor(int button, bool redVal, bool greenVal, bool blueVal);
 void prettyColors();
 void readButtons();
 void sendJoyStates();

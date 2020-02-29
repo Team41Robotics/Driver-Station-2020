@@ -12,11 +12,16 @@ void setupButtons() {
 	}
 }
 
-void setColors(bool redVal, bool greenVal, bool blueVal) {
-  for (int i = 0; i < NUM_BUTTONS; i++) {
-    digitalWrite(buttonRedPorts[i], redVal);
-    digitalWrite(buttonGreenPorts[i], greenVal);
-    digitalWrite(buttonBluePorts[i], blueVal);
+void setColor(int i, bool redVal, bool greenVal, bool blueVal) {
+  digitalWrite(buttonRedPorts[i], redVal);
+  digitalWrite(buttonGreenPorts[i], greenVal);
+  digitalWrite(buttonBluePorts[i], blueVal);
+}
+
+void prettyColors() {
+  for (int i = 0; i < NUM_BUTTONS; ++i){
+    if (buttonStates[i]) setColor(i, HIGH, LOW, LOW);
+    else setColor(i, LOW, HIGH, HIGH);
   }
 }
 
@@ -97,12 +102,6 @@ void sendJoyStates() {
 	Joystick.state.buttons.b14 = parsedData[15];
 	Joystick.sendState();
 }
-
-void prettyColors() {
-	setColors(LOW, LOW, HIGH);
-}
-
-
 
 int receiveBytes() {
 	//if (Serial2.available()) SerialUSB.println("Receiving bytes:" + (int)Serial2.available());
