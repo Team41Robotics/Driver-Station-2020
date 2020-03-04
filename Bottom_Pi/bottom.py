@@ -2,6 +2,9 @@ import button
 from tkinter import Tk, PhotoImage, Canvas, CENTER, RIGHT, LEFT
 import math
 from PIL import Image, ImageTk
+import os
+
+dirname = os.path.dirname(__file__)
 
 test = True
 
@@ -49,7 +52,7 @@ ctx = Canvas(root, width=width, height=height, background="black")
 ctx.pack()
 
 # Background
-bg = Image.open('./field.png')
+bg = Image.open(os.path.join(dirname,'./field.png'))
 bg = ImageTk.PhotoImage(bg)
 ctx.create_image(width/2, height/2, anchor=CENTER, image=bg)
 
