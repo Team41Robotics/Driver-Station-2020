@@ -19,7 +19,7 @@ ser = serial.Serial("/dev/tty", 9600)  # /dev/ttyAMA0 on the pi
 root = Tk()
 
 # Variables
-img = PhotoImage(file="./Zoom.gif")
+img = PhotoImage(file="./Zoom.gif", format="gif")
 img2 = img.subsample(2)
 img3 = img2.subsample(2)
 imageTable = [img3, img2, img]

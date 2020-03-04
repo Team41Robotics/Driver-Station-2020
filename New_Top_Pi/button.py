@@ -26,7 +26,7 @@ class Button:
         # Create the text on the button
         ctx.delete(self.name+"text")
         ctx.create_text(self.x1+(self.width/2), self.y1+(self.height/2), 
-            text=self.text_active, tag=self.name+"_text", font = ("Comic Sans MS", 14))
+            text=self.text_active, tag=self.name+"_text", font = ("Arial", 18))
 
     def checkClicked(self, event):
         # If the click is inside the rectange of the button, it is clicked
