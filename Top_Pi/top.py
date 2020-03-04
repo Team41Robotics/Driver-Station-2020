@@ -2,6 +2,9 @@ from button import Button
 from tkinter import Tk, PhotoImage, Canvas, CENTER, RIGHT, LEFT, N
 import math
 from PIL import Image, ImageTk
+import os
+
+dirname = os.path.dirname(__file__)
 
 test = True
 
@@ -51,10 +54,10 @@ b4 = Button('manual', btnX, btnY, btnW, btnH, 'Manual', color_active, 32)
 b5 = Button('auto', btnX + btnW + padding, btnY, btnW, btnH, 'Auto', color_inactive, 32)
 
 # Hook buttons
-hook_imgs = ['./hook0.gif','./hook1.gif','./hook2.gif']
+hook_imgs = ['hook0.gif','hook1.gif','hook2.gif']
 hook_msgs = ['Go to pos 1', 'Go to pos 2', 'In manual']
 hook_colors = ['white', 'yellow', 'orange']
-hook_imgs = [Image.open(x) for x in hook_imgs]
+hook_imgs = [Image.open(os.path.join(dirname, x)) for x in hook_imgs]
 hook_imgs = [ImageTk.PhotoImage(x) for x in hook_imgs]
 b6 = Button('go', 100, 350, 200, 100, hook_msgs[0], hook_colors[0], 24)
 
@@ -143,7 +146,6 @@ def publish():
         val = ((hook - 1) << 2) | 3
     else:
         val = (mode << 2) | (zoom - 1)
-    print(val)
     ser.write(val.to_bytes(1, byteorder='big'))
     root.after(delay, publish)
 
