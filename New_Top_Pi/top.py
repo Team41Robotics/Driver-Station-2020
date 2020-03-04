@@ -139,12 +139,11 @@ ctx.pack()
 
 def publish():
     val = 0
-    if hook == 1:
-        val = 3
-    elif hook == 2:
-        val = 7
+    if hook > 0:
+        val = ((hook - 1) << 2) | 3
     else:
         val = (mode << 2) | (zoom - 1)
+    print(val)
     ser.write(val.to_bytes(1, byteorder='big'))
     root.after(delay, publish)
 
