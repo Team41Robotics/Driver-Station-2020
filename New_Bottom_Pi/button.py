@@ -3,7 +3,7 @@ from tkinter import *
 class Button:
     isClicked = False
 
-    def __init__(self, tag, x, y, width, height, text, color="blue"):
+    def __init__(self, tag, x, y, width, height, text, color="blue", font_size=18):
         # Set name, dimensions and text
         self.name = tag
         self.height = height
@@ -17,6 +17,7 @@ class Button:
         self.text = text
         self.text_active = text
         self.color = color
+        self.font_size = font_size
     
     def drawButton(self, ctx):
         # Create the actual button
@@ -26,7 +27,7 @@ class Button:
         # Create the text on the button
         ctx.delete(self.name+"text")
         ctx.create_text(self.x1+(self.width/2), self.y1+(self.height/2), 
-            text=self.text_active, tag=self.name+"_text", font = ("Arial", 18))
+            text=self.text_active, tag=self.name+"_text", font = ("Arial", self.font_size))
 
     def checkClicked(self, event):
         # If the click is inside the rectange of the button, it is clicked
