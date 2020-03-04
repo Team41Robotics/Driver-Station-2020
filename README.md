@@ -12,6 +12,8 @@
   2. Both Raspberry Pi's also need to have tkinter to be able to display graphics. Run `sudo apt-get install python3-tk` to install. More information about it [here](https://docs.python.org/3/library/tk.html).
   3. The computer deploying code to the Arduino Due needs to have the joystick library on it. Make sure you use [this one](https://github.com/LordNuke/ArduinoLibs), as it was used in the development of the code and other libraries do not work. Download the file, unzip it, and [add the library to the Arduino IDE](http://interactiondesign.se/wiki/arduino:installing_using_third_party_libraries).
 
+To run the GUI on startup, run it with sudo in /etc/X11/xinit/xinitrc
+
 ## TODO
 - Change "left pi" and "right pi" to top Pi and bottom Pi to match new 
 driver station layout
