@@ -1,6 +1,0 @@
-Raspberry Pis:
-pyserial    -> "sudo apt-get install python3-serial"
-tkinter     -> "sudo apt-get install python3-tk"
-
-Arduino:
-Joystick    -> https://github.com/LordNuke/ArduinoLibs
