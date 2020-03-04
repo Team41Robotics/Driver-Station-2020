@@ -13,7 +13,7 @@
 
 To run the Raspberry Pi GUI's on startup, add the line `@sudo /usr/bin/python3 /home/pi/Top_Pi/top.py` to `/etc/xdg/lxsession/LXDE-pi/autostart`. Change the path of the Python script accordingly.
 
-Run `sudo raspi-config` and enable SSH. Make sure to enable the serial hardware but not the serial console. All of these are under the Interfacing Options heading.
+Run `sudo raspi-config` and go to the Interfacing Options heading. Enable SSH and enable the serial port hardware, but do not enable the serial login shell.
 
 Also, make sure to add the following lines to `/boot/config.txt` to force the 800x480 resolution and rotate the screen 180 degrees.
 ```
@@ -23,3 +23,5 @@ hdmi_cvt=800 480 60 6 0 0 0
 hdmi_drive=1
 display_rotate=2
 ```
+
+When deploying the GUI's to the Pi's, remember to change the line `test = True` to `test = False` in the Python scripts.
