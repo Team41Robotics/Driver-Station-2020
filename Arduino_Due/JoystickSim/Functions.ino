@@ -34,42 +34,8 @@ void readButtons() {
 }
 
 void getPiData() {
-	if (Serial1.available()) {
-		int val = Serial1.read();
-		//SerialUSB.println(val);
-		switch(val) {
-			case 1:
-				pi1 = HAT_UPLEFT;
-				break;
-			case 2:
-				pi1 = HAT_UP;
-				break;
-			case 3:
-				pi1 = HAT_UPRIGHT;
-				break;
-			default:
-				pi1 = HAT_CENTER;
-				break;
-		}
-	}
-	if (Serial3.available()) {
-		int val = Serial3.read();
-		//SerialUSB.println(val);
-		switch(val) {
-			case 1:
-				pi2 = HAT_UPLEFT;
-				break;
-			case 2:
-				pi2 = HAT_UP;
-				break;
-			case 3:
-				pi2 = HAT_UPRIGHT;
-				break;
-			default:
-				pi2 = HAT_CENTER;
-				break;
-		}
-	}
+	if (Serial1.available()) pi1 = (int) Serial1.read();
+	if (Serial3.available()) pi2 = (int) Serial3.read();
 }
 
 

@@ -143,9 +143,9 @@ ctx.pack()
 def publish():
     val = 0
     if hook > 0:
-        val = ((hook - 1) << 2) | 3
+        val = ((hook - 1) << 2) | 3 # 3 if hook == 1, 7 if hook == 2
     else:
-        val = (mode << 2) | (zoom - 1)
+        val = (mode << 2) | (zoom - 1) # Lower 2 bits are zoom, third bit is mode
     ser.write(val.to_bytes(1, byteorder='big'))
     root.after(delay, publish)
 

@@ -3,12 +3,12 @@
 
 
 void setupButtons();
-void setColor(int button, bool redVal, bool greenVal, bool blueVal);
+void setColor(int i, bool redVal, bool greenVal, bool blueVal);
 void prettyColors();
 void readButtons();
 void sendJoyStates();
 void getPiData();
-void parseBytes(int);
+void parseBytes(int len);
 
 int receiveBytes();
 
