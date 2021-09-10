@@ -1,5 +1,3 @@
-from tkinter import *
-
 class Button:
     isClicked = False
 

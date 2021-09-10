@@ -20,8 +20,9 @@ root = Tk()
 # Full screen
 if not test:
     root.overrideredirect(True)
-    root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
-    root.focus_set()  #Move focus to this widget
+    root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(),
+                                       root.winfo_screenheight()))
+    root.focus_set()  # Move focus to this widget
     root.bind("<Escape>", lambda e: root.quit())
     root.config(cursor="none")
 
@@ -41,8 +42,10 @@ delay = 10
 
 # Button Dimensions and button objects
 b1 = button.Button('btn1', btnX, btnY, btnW, btnH, "1", color_inactive)
-b2 = button.Button('btn2', btnX, btnY + btnH + padding, btnW, btnH, "2", color_inactive)
-b3 = button.Button('btn3', btnX, btnY + (btnH + padding)*2, btnW, btnH, "3", color_inactive)
+b2 = button.Button('btn2', btnX, btnY + btnH + padding,
+                   btnW, btnH, "2", color_inactive)
+b3 = button.Button('btn3', btnX, btnY + (btnH + padding)
+                   * 2, btnW, btnH, "3", color_inactive)
 
 # Exit button - top left
 ex = button.Button('exit', 0, 0, 25, 25, "X", "red")
@@ -52,12 +55,14 @@ ctx = Canvas(root, width=width, height=height, background="black")
 ctx.pack()
 
 # Background
-bg = Image.open(os.path.join(dirname,'./field.png'))
+bg = Image.open(os.path.join(dirname, './field.png'))
 bg = ImageTk.PhotoImage(bg)
 ctx.create_image(width/2, height/2, anchor=CENTER, image=bg)
 
 # Text at top
-ctx.create_text(400, 25, justify=CENTER, text="Choose a starting position", font=("Arial", 28), fill="White")
+ctx.create_text(400, 25, justify=CENTER, text="Choose a starting position", font=(
+    "Arial", 28), fill="White")
+
 
 def handle_click(event):
     if not test:
